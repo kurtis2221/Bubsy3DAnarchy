@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=3 uid="uid://c1fn7txwjhyor"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerControl.cs" id="1_yn1dr"]
+[ext_resource type="AudioStream" uid="uid://ceglelvbo7fl6" path="res://Sounds/jump.wav" id="2_m176a"]
+[ext_resource type="PackedScene" uid="uid://b62utya2425gn" path="res://Models/Bubsy/bubsy.FBX" id="2_nw3nk"]
+[ext_resource type="Script" path="res://Scripts/CameraControl.cs" id="3_62swt"]
+[ext_resource type="AudioStream" uid="uid://ba0hbjbhxv4vo" path="res://Sounds/land.wav" id="3_co1xx"]
+[ext_resource type="AudioStream" uid="uid://b0dlgsfamusww" path="res://Sounds/death.wav" id="4_l7gcy"]
+[ext_resource type="AudioStream" uid="uid://dn7wgqjh57m62" path="res://Sounds/block.wav" id="5_r3iek"]
+[ext_resource type="AudioStream" uid="uid://c2srdqxaryvnf" path="res://Sounds/armor.wav" id="6_cfvw2"]
+[ext_resource type="AudioStream" uid="uid://hwn8cm1jwy57" path="res://Sounds/alarm.wav" id="7_qpo76"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nrtxb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pvsr0"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("plat_scan", "char_tr", "char_obj", "cam_y")]
+floor_block_on_wall = false
+floor_snap_length = 0.2
+platform_on_leave = 2
+platform_floor_layers = 0
+script = ExtResource("1_yn1dr")
+plat_scan = NodePath("ShapeCast3D")
+char_tr = NodePath("CharDummy")
+char_obj = NodePath("CharDummy/Bubsy/bubsy")
+cam_y = NodePath("CamY")
+sounds = Array[AudioStream]([ExtResource("2_m176a"), ExtResource("3_co1xx"), ExtResource("4_l7gcy"), ExtResource("5_r3iek"), ExtResource("6_cfvw2"), ExtResource("7_qpo76")])
+
+[node name="CharDummy" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Bubsy" type="Node3D" parent="CharDummy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="bubsy" parent="CharDummy/Bubsy" instance=ExtResource("2_nw3nk")]
+
+[node name="Col" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_nrtxb")
+
+[node name="CamY" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CamX" type="Node3D" parent="CamY" node_paths=PackedStringArray("player")]
+script = ExtResource("3_62swt")
+player = NodePath("..")
+
+[node name="Camera3D" type="Camera3D" parent="CamY/CamX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 3.19998)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="CamY/CamX/Camera3D"]
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_pvsr0")

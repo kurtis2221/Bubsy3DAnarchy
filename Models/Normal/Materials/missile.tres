@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://61k1vypw7pl2"]
+
+[ext_resource type="Texture2D" uid="uid://ds23r684418rt" path="res://Models/Normal/Textures/missile.png" id="1_3l1m7"]
+
+[resource]
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+albedo_texture = ExtResource("1_3l1m7")
+texture_filter = 0

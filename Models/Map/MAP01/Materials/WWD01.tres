@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cu4cp6qt11tay"]
+
+[ext_resource type="Texture2D" uid="uid://b852pu7ymf6kr" path="res://Models/Map/MAP01/Textures/WWD01.png" id="1_xjdu4"]
+
+[resource]
+resource_name = "WWD01"
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.627451, 0.627451, 0.627451, 1)
+albedo_texture = ExtResource("1_xjdu4")
+texture_filter = 0

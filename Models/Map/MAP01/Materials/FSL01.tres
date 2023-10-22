@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bqavgeyx6e3r7"]
+
+[ext_resource type="Texture2D" uid="uid://byyewsevefal8" path="res://Models/Map/MAP01/Textures/FSL01.png" id="1_c2mwp"]
+
+[resource]
+resource_name = "FSL01"
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.627451, 0.627451, 0.627451, 1)
+albedo_texture = ExtResource("1_c2mwp")
+texture_filter = 0

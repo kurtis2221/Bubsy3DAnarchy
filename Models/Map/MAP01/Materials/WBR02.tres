@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dc3lpvkosmyyu"]
+
+[ext_resource type="Texture2D" uid="uid://dfd7tvxbppmgh" path="res://Models/Map/MAP01/Textures/WBR02.png" id="1_t84qh"]
+
+[resource]
+resource_name = "WBR02"
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.627451, 0.627451, 0.627451, 1)
+albedo_texture = ExtResource("1_t84qh")
+texture_filter = 0

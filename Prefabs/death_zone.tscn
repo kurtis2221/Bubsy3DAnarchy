@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfgvo0cp58axi"]
+
+[ext_resource type="Script" path="res://Scripts/DeathZone.cs" id="1_dpbrl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y6k4h"]
+
+[node name="DeathZone" type="Area3D"]
+script = ExtResource("1_dpbrl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_y6k4h")

@@ -1,0 +1,893 @@
+[gd_scene load_steps=35 format=3 uid="uid://d4md3fgm2riqm"]
+
+[ext_resource type="Script" path="res://Scripts/GameControl.cs" id="1_folew"]
+[ext_resource type="PackedScene" uid="uid://dd08tg3h21d2q" path="res://Prefabs/missile.tscn" id="3_emr2n"]
+[ext_resource type="PackedScene" uid="uid://c8qit141fb8vc" path="res://Prefabs/ufo.tscn" id="5_d5fs2"]
+[ext_resource type="PackedScene" uid="uid://c1fn7txwjhyor" path="res://Prefabs/player.tscn" id="6_dr1gv"]
+[ext_resource type="Script" path="res://Scripts/ObjMove.cs" id="7_yu7my"]
+[ext_resource type="PackedScene" uid="uid://dm21u5dqx48rf" path="res://Prefabs/car.tscn" id="8_h2g0f"]
+[ext_resource type="Script" path="res://Scripts/ObjRotate.cs" id="8_p1auy"]
+[ext_resource type="PackedScene" uid="uid://df3w70wisfg3" path="res://Prefabs/checkpoint.tscn" id="9_7mnhn"]
+[ext_resource type="AudioStream" uid="uid://orjbrgkswcko" path="res://Sounds/Music/Action 52 - CheetahMen Theme.mp3" id="9_givbw"]
+[ext_resource type="PackedScene" uid="uid://ytfmvh4xkxec" path="res://Prefabs/table.tscn" id="10_2ndvg"]
+[ext_resource type="PackedScene" uid="uid://bcg13hsjimn6o" path="res://Prefabs/checkpoint_t.tscn" id="10_6dv6g"]
+[ext_resource type="PackedScene" uid="uid://ddc8lgepy2gl7" path="res://Prefabs/spin.tscn" id="10_dqtft"]
+[ext_resource type="PackedScene" uid="uid://0kaava6h5h6a" path="res://Prefabs/chair.tscn" id="11_3l7md"]
+[ext_resource type="PackedScene" uid="uid://pmyr5ydbj4m" path="res://Prefabs/checkpoint_e.tscn" id="11_j3ikk"]
+[ext_resource type="PackedScene" uid="uid://cfgvo0cp58axi" path="res://Prefabs/death_zone.tscn" id="11_lq2us"]
+[ext_resource type="Script" path="res://Scripts/CheckpontHandler.cs" id="12_swfrj"]
+[ext_resource type="Script" path="res://Scripts/ObjDestroy.cs" id="13_phr1a"]
+[ext_resource type="PackedScene" uid="uid://ckyfbqh7uvrrl" path="res://Prefabs/kaizo_block.tscn" id="14_tp5um"]
+[ext_resource type="Texture2D" uid="uid://5ra3bpfdcl80" path="res://Textures/br_win.tga" id="15_vvmtu"]
+[ext_resource type="Script" path="res://Scripts/UVOffsetScript.cs" id="18_5pftr"]
+[ext_resource type="Texture2D" uid="uid://dm3cqh2ris1xn" path="res://Textures/back01.png" id="19_vpjl1"]
+[ext_resource type="PackedScene" uid="uid://cjvgih44rp4wf" path="res://Models/Map/MAP01/MAP01.FBX" id="20_dcgoc"]
+[ext_resource type="PackedScene" uid="uid://djdceu0uqj8m2" path="res://Prefabs/fire.tscn" id="21_fhcfg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kew7e"]
+size = Vector3(1.6183, 0.605215, 0.422273)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8piqw"]
+size = Vector3(1, 3.89779, 5.52939)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8bill"]
+size = Vector3(1, 5.16416, 1.85612)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ihihv"]
+size = Vector3(60, 1, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glrdp"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3i4gl"]
+size = Vector3(2.40844, 2.92447, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ri8vw"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_shqhe"]
+panorama = ExtResource("19_vpjl1")
+filter = false
+
+[sub_resource type="Sky" id="Sky_1g7ru"]
+sky_material = SubResource("PanoramaSkyMaterial_shqhe")
+
+[sub_resource type="Environment" id="Environment_2of3n"]
+background_mode = 2
+sky = SubResource("Sky_1g7ru")
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.6, 0.6, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rvnek"]
+font_size = 48
+outline_size = 24
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Game" type="Node3D" node_paths=PackedStringArray("msg_quit")]
+script = ExtResource("1_folew")
+msg_quit = NodePath("HUD/Quit")
+
+[node name="Dynamic" type="Node3D" parent="."]
+
+[node name="Spin" parent="Dynamic" instance=ExtResource("10_dqtft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.6024, 18.8492, 35.4445)
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(0, 1, 0)
+inactive = true
+
+[node name="Spin2" parent="Dynamic" instance=ExtResource("10_dqtft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.9885, 21.167, 40.5283)
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(0, 1, 0)
+inactive = true
+
+[node name="Spin3" parent="Dynamic" instance=ExtResource("10_dqtft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.3963, 26.7216, 46.7982)
+
+[node name="Ufo" parent="Dynamic" instance=ExtResource("5_d5fs2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.35368, 21.9516, 47.5005)
+script = ExtResource("7_yu7my")
+speed = 0.1
+target = Vector3(6, 5, 0)
+
+[node name="Ufo2" parent="Dynamic" instance=ExtResource("5_d5fs2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.45411, 27.4863, 47.3231)
+
+[node name="Missile" parent="Dynamic" instance=ExtResource("3_emr2n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3933, 26.5118, 47.124)
+script = ExtResource("7_yu7my")
+speed = 0.2
+target = Vector3(30, 0, 0)
+move_type = true
+
+[node name="KaizoBlock" parent="Dynamic" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.4602, 10.3503, -16.6313)
+
+[node name="KaizoBlock7" parent="Dynamic" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.4602, 10.3503, -16.6313)
+
+[node name="KaizoBlock2" parent="Dynamic" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4609, 11.1012, -10.6834)
+
+[node name="KaizoBlock3" parent="Dynamic" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.585, 8.68935, 32.3717)
+
+[node name="KaizoBlock4" parent="Dynamic" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.5013, 11.9013, 32.8034)
+
+[node name="KaizoBlock5" parent="Dynamic" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.0519, 15.2254, 33.5088)
+
+[node name="KaizoBlock6" parent="Dynamic" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.5652, 10.3503, -18.1875)
+
+[node name="Car" parent="Dynamic" instance=ExtResource("8_h2g0f")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 46.869, 5.72908, 73.2352)
+script = ExtResource("7_yu7my")
+speed = 0.3
+target = Vector3(0, 0, -40)
+move_type = true
+
+[node name="DeathZone" parent="Dynamic/Car" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.08497, 0.474009, 0.0290642)
+
+[node name="CollisionShape3D" parent="Dynamic/Car/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_kew7e")
+
+[node name="Car2" parent="Dynamic" instance=ExtResource("8_h2g0f")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 34.2086, 5.72908, 80.5023)
+script = ExtResource("7_yu7my")
+speed = 0.3
+target = Vector3(0, 0, -50)
+move_type = true
+
+[node name="DeathZone" parent="Dynamic/Car2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.08497, 0.474009, 0.0290642)
+
+[node name="CollisionShape3D" parent="Dynamic/Car2/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_kew7e")
+
+[node name="Car3" parent="Dynamic" instance=ExtResource("8_h2g0f")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.6055, 5.72908, 84.7561)
+script = ExtResource("7_yu7my")
+speed = 0.3
+target = Vector3(0, 0, -60)
+move_type = true
+
+[node name="DeathZone" parent="Dynamic/Car3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.08497, 0.474009, 0.0290642)
+
+[node name="CollisionShape3D" parent="Dynamic/Car3/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_kew7e")
+
+[node name="Car4" parent="Dynamic" instance=ExtResource("8_h2g0f")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 27.5962, 5.72908, 23.7591)
+script = ExtResource("7_yu7my")
+speed = 0.4
+target = Vector3(0, 0, 50)
+move_type = true
+
+[node name="DeathZone" parent="Dynamic/Car4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.08497, 0.474009, 0.0290642)
+
+[node name="CollisionShape3D" parent="Dynamic/Car4/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_kew7e")
+
+[node name="Car5" parent="Dynamic" instance=ExtResource("8_h2g0f")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 38.2367, 5.72908, 29.0935)
+script = ExtResource("7_yu7my")
+speed = 0.4
+target = Vector3(0, 0, 40)
+move_type = true
+
+[node name="DeathZone" parent="Dynamic/Car5" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.08497, 0.474009, 0.0290642)
+
+[node name="CollisionShape3D" parent="Dynamic/Car5/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_kew7e")
+
+[node name="Car6" parent="Dynamic" instance=ExtResource("8_h2g0f")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 18.092, 5.72908, 19.383)
+script = ExtResource("7_yu7my")
+speed = 0.4
+target = Vector3(0, 0, 60)
+move_type = true
+
+[node name="DeathZone" parent="Dynamic/Car6" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.08497, 0.474009, 0.0290642)
+
+[node name="CollisionShape3D" parent="Dynamic/Car6/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_kew7e")
+
+[node name="Dynamic2" type="Node3D" parent="."]
+
+[node name="TableAxis" type="Node3D" parent="Dynamic2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.9653, 11.7596, 14.6767)
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(0, 1, 0)
+
+[node name="Table" parent="Dynamic2/TableAxis" instance=ExtResource("10_2ndvg")]
+script = ExtResource("7_yu7my")
+speed = 0.1
+target = Vector3(0, 20, 0)
+
+[node name="TableAxis2" type="Node3D" parent="Dynamic2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.2169, 33.2642, 14.6767)
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(0, 1, 0)
+
+[node name="Table" parent="Dynamic2/TableAxis2" instance=ExtResource("10_2ndvg")]
+
+[node name="Chair" parent="Dynamic2" instance=ExtResource("11_3l7md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.61, 6.68129, 21.2987)
+script = ExtResource("7_yu7my")
+speed = 0.5
+target = Vector3(0, 50, 0)
+move_type = true
+inactive = true
+drop = true
+
+[node name="Chair2" parent="Dynamic2" instance=ExtResource("11_3l7md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06987, 33.8052, 14.6469)
+script = ExtResource("7_yu7my")
+speed = 0.15
+target = Vector3(-60, 0, 0)
+move_type = true
+
+[node name="Table" parent="Dynamic2" instance=ExtResource("10_2ndvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.83359, 33.9979, 14.4376)
+
+[node name="Dynamic3" type="Node3D" parent="."]
+
+[node name="Chair" parent="Dynamic3" instance=ExtResource("11_3l7md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.0053, -0.8, -11.3542)
+script = ExtResource("7_yu7my")
+speed = 0.05
+target = Vector3(0, 2, 0)
+
+[node name="Chair2" parent="Dynamic3" instance=ExtResource("11_3l7md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.2341, -0.530007, -7.78407)
+script = ExtResource("7_yu7my")
+speed = 0.08
+target = Vector3(0, 2, 0)
+
+[node name="Chair3" parent="Dynamic3" instance=ExtResource("11_3l7md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.683, -0.8, -9.67089)
+script = ExtResource("7_yu7my")
+speed = 0.1
+target = Vector3(0, 2, 0)
+
+[node name="Missile" parent="Dynamic3" instance=ExtResource("3_emr2n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -109.773, 0.212801, -9.59357)
+
+[node name="Spin" parent="Dynamic3" instance=ExtResource("10_dqtft")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -90.6165, 3.80762, -18.2803)
+collision_layer = 2
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(1, 0, 0)
+
+[node name="Trigger" type="Node3D" parent="Dynamic3/Spin"]
+transform = Transform3D(1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DeathZone" parent="Dynamic3/Spin/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone2" parent="Dynamic3/Spin/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger/DeathZone2" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger2" type="Node3D" parent="Dynamic3/Spin"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic3/Spin/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger2/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic3/Spin/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger2/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger3" type="Node3D" parent="Dynamic3/Spin"]
+transform = Transform3D(-1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, -7.37408e-15, -8.74228e-08, -5.19474e-15, -1, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic3/Spin/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger3/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic3/Spin/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger3/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger4" type="Node3D" parent="Dynamic3/Spin"]
+transform = Transform3D(1.31134e-07, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -1, 4.37114e-08, 1.31134e-07, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic3/Spin/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger4/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic3/Spin/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/Spin/Trigger4/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="SpinAxis" type="Node3D" parent="Dynamic3"]
+transform = Transform3D(-2.18557e-08, -0.5, -0.866025, 1, -4.37114e-08, 0, -3.78552e-08, -0.866026, 0.5, -89.8864, 3.80762, -2.37955)
+
+[node name="Spin2" parent="Dynamic3/SpinAxis" instance=ExtResource("10_dqtft")]
+transform = Transform3D(1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 2
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(0, 1, 0)
+
+[node name="Trigger" type="Node3D" parent="Dynamic3/SpinAxis/Spin2"]
+transform = Transform3D(1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DeathZone" parent="Dynamic3/SpinAxis/Spin2/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone2" parent="Dynamic3/SpinAxis/Spin2/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger/DeathZone2" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger2" type="Node3D" parent="Dynamic3/SpinAxis/Spin2"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic3/SpinAxis/Spin2/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger2/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic3/SpinAxis/Spin2/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger2/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger3" type="Node3D" parent="Dynamic3/SpinAxis/Spin2"]
+transform = Transform3D(-1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, -7.37408e-15, -8.74228e-08, -5.19474e-15, -1, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic3/SpinAxis/Spin2/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger3/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic3/SpinAxis/Spin2/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger3/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger4" type="Node3D" parent="Dynamic3/SpinAxis/Spin2"]
+transform = Transform3D(1.31134e-07, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -1, 4.37114e-08, 1.31134e-07, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic3/SpinAxis/Spin2/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger4/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic3/SpinAxis/Spin2/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic3/SpinAxis/Spin2/Trigger4/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Dynamic4" type="Node3D" parent="."]
+
+[node name="fire" parent="Dynamic4" instance=ExtResource("21_fhcfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.5698, 6.23292, 37.1093)
+
+[node name="fire2" parent="Dynamic4" instance=ExtResource("21_fhcfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.777, 6.23292, 37.1093)
+
+[node name="fire3" parent="Dynamic4" instance=ExtResource("21_fhcfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.0623, 6.23292, 37.1093)
+
+[node name="fire4" parent="Dynamic4" instance=ExtResource("21_fhcfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.5951, 7.44584, 4.87558)
+
+[node name="fire5" parent="Dynamic4" instance=ExtResource("21_fhcfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.5253, 8.94403, -8.54895)
+
+[node name="fire6" parent="Dynamic4" instance=ExtResource("21_fhcfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.4656, 8.94403, -17.4684)
+
+[node name="Dynamic5" type="Node3D" parent="."]
+
+[node name="Table" parent="Dynamic5" instance=ExtResource("10_2ndvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.4811, 7.23291, 32.8938)
+script = ExtResource("7_yu7my")
+speed = 0.04
+target = Vector3(10, 0, 0)
+inactive = true
+
+[node name="KaizoBlock" parent="Dynamic5" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.2855, -7.85338, 4.58028)
+
+[node name="KaizoBlock2" parent="Dynamic5" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.9744, -4.38374, 4.58028)
+
+[node name="KaizoBlock3" parent="Dynamic5" instance=ExtResource("14_tp5um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.459, -1.12031, 4.58028)
+
+[node name="Dynamic6" type="Node3D" parent="."]
+
+[node name="Spin" parent="Dynamic6" instance=ExtResource("10_dqtft")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -53.3213, -8.51066, -18.2803)
+collision_layer = 2
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(1, 0, 0)
+
+[node name="Trigger" type="Node3D" parent="Dynamic6/Spin"]
+transform = Transform3D(1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DeathZone" parent="Dynamic6/Spin/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone2" parent="Dynamic6/Spin/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger/DeathZone2" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger2" type="Node3D" parent="Dynamic6/Spin"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger2/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger2/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger3" type="Node3D" parent="Dynamic6/Spin"]
+transform = Transform3D(-1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, -7.37408e-15, -8.74228e-08, -5.19474e-15, -1, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger3/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger3/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger4" type="Node3D" parent="Dynamic6/Spin"]
+transform = Transform3D(1.31134e-07, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -1, 4.37114e-08, 1.31134e-07, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger4/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin/Trigger4/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Spin2" parent="Dynamic6" instance=ExtResource("10_dqtft")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -41.5289, -8.51066, -2.87277)
+collision_layer = 2
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(1, 0, 0)
+
+[node name="Trigger" type="Node3D" parent="Dynamic6/Spin2"]
+transform = Transform3D(1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DeathZone" parent="Dynamic6/Spin2/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone2" parent="Dynamic6/Spin2/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger/DeathZone2" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger2" type="Node3D" parent="Dynamic6/Spin2"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin2/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger2/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin2/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger2/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger3" type="Node3D" parent="Dynamic6/Spin2"]
+transform = Transform3D(-1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, -7.37408e-15, -8.74228e-08, -5.19474e-15, -1, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin2/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger3/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin2/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger3/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger4" type="Node3D" parent="Dynamic6/Spin2"]
+transform = Transform3D(1.31134e-07, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -1, 4.37114e-08, 1.31134e-07, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin2/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger4/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin2/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin2/Trigger4/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Spin3" parent="Dynamic6" instance=ExtResource("10_dqtft")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -29.0559, -8.51066, -17.8445)
+collision_layer = 2
+script = ExtResource("8_p1auy")
+speed = 0.05
+axis = Vector3(1, 0, 0)
+
+[node name="Trigger" type="Node3D" parent="Dynamic6/Spin3"]
+transform = Transform3D(1, -3.55271e-15, 0, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DeathZone" parent="Dynamic6/Spin3/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone2" parent="Dynamic6/Spin3/Trigger" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger/DeathZone2" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger2" type="Node3D" parent="Dynamic6/Spin3"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin3/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger2/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin3/Trigger2" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger2/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger3" type="Node3D" parent="Dynamic6/Spin3"]
+transform = Transform3D(-1, 8.74228e-08, 8.74228e-08, 8.74228e-08, 1, -7.37408e-15, -8.74228e-08, -5.19474e-15, -1, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin3/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger3/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin3/Trigger3" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger3/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Trigger4" type="Node3D" parent="Dynamic6/Spin3"]
+transform = Transform3D(1.31134e-07, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -1, 4.37114e-08, 1.31134e-07, 0, 0, 0)
+
+[node name="DeathZone3" parent="Dynamic6/Spin3/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 7.81597e-14, 3.09086e-08, -0.707107, 0.707107, 4.62553, 0, 4.64958)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger4/DeathZone3" index="0"]
+shape = SubResource("BoxShape3D_8piqw")
+
+[node name="DeathZone4" parent="Dynamic6/Spin3/Trigger4" instance=ExtResource("11_lq2us")]
+transform = Transform3D(-3.09085e-08, 0.707107, 0.707107, -1, -4.37113e-08, 1.13687e-13, 3.09086e-08, -0.707107, 0.707107, 7.0928, 0, 7.02556)
+
+[node name="CollisionShape3D" parent="Dynamic6/Spin3/Trigger4/DeathZone4" index="0"]
+shape = SubResource("BoxShape3D_8bill")
+
+[node name="Triggers" type="Node3D" parent="."]
+
+[node name="WaterDestroy" type="Node3D" parent="Triggers" node_paths=PackedStringArray("obj_list")]
+script = ExtResource("13_phr1a")
+obj_list = [NodePath("../../Map/MAP01/RootNode/MAP01/MAP01_W"), NodePath("../../Effects/DeathZone"), NodePath("../../Effects/DeathZone2")]
+
+[node name="Effects" type="Node3D" parent="."]
+
+[node name="DeathZone" parent="Effects" instance=ExtResource("11_lq2us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.198, -0.1, -12)
+
+[node name="CollisionShape3D" parent="Effects/DeathZone" index="0"]
+shape = SubResource("BoxShape3D_ihihv")
+
+[node name="DeathZone2" parent="Effects" instance=ExtResource("11_lq2us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.6995, -0.1, -10.7042)
+
+[node name="CollisionShape3D" parent="Effects/DeathZone2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.152809)
+shape = SubResource("BoxShape3D_glrdp")
+
+[node name="DeathZone3" parent="Effects" instance=ExtResource("11_lq2us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.7878, 7.75006, 36.8181)
+
+[node name="CollisionShape3D" parent="Effects/DeathZone3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.152809)
+shape = SubResource("BoxShape3D_3i4gl")
+
+[node name="DeathZone4" parent="Effects" instance=ExtResource("11_lq2us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.4766, 8.02977, 4.81888)
+
+[node name="CollisionShape3D" parent="Effects/DeathZone4" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.152809)
+shape = SubResource("BoxShape3D_ri8vw")
+
+[node name="DeathZone5" parent="Effects" instance=ExtResource("11_lq2us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.7162, 9.47797, -8.73113)
+
+[node name="CollisionShape3D" parent="Effects/DeathZone5" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.152809)
+shape = SubResource("BoxShape3D_ri8vw")
+
+[node name="DeathZone6" parent="Effects" instance=ExtResource("11_lq2us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.443, 9.47797, -17.6751)
+
+[node name="CollisionShape3D" parent="Effects/DeathZone6" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.152809)
+shape = SubResource("BoxShape3D_ri8vw")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+shadow_reverse_cull_face = true
+directional_shadow_mode = 1
+
+[node name="Checkpoints" type="Node3D" parent="."]
+script = ExtResource("12_swfrj")
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7682, 7.61196, -17.6648)
+first = true
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("10_6dv6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.513, 9.06119, -10.544)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20718, 7.61196, 43.0632)
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("10_6dv6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.3361, 7.66275, 56.3777)
+
+[node name="Checkpoint5" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.3755, 18.8776, 36.0058)
+
+[node name="Checkpoint6" parent="Checkpoints" instance=ExtResource("10_6dv6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.1335, 29.1142, 48.0236)
+
+[node name="Checkpoint7" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.6771, 7.65397, 21.4542)
+
+[node name="Checkpoint8" parent="Checkpoints" instance=ExtResource("10_6dv6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8122, 35.9604, 14.675)
+
+[node name="Checkpoint9" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.1276, 7.65397, -14.1081)
+
+[node name="Checkpoint10" parent="Checkpoints" instance=ExtResource("10_6dv6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.5376, 6.72824, -21.1943)
+
+[node name="Checkpoint11" parent="Checkpoints" instance=ExtResource("10_6dv6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -111.659, 3.18405, -9.54545)
+
+[node name="Checkpoint12" parent="Checkpoints" node_paths=PackedStringArray("trigger") instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.1016, 7.53246, 20.7804)
+trigger = NodePath("../../Triggers/WaterDestroy")
+
+[node name="Checkpoint13" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.1016, -8.98954, -7.90841)
+
+[node name="Checkpoint14" parent="Checkpoints" instance=ExtResource("10_6dv6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3769, -8.70631, -10.8821)
+
+[node name="Checkpoint15" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.5195, 4.48572, 7.09676)
+
+[node name="Checkpoint16" parent="Checkpoints" instance=ExtResource("9_7mnhn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.6998, 7.83808, 31.7713)
+
+[node name="CheckpointEND" parent="Checkpoints" instance=ExtResource("11_j3ikk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0236213, 7.65115, -25.1445)
+
+[node name="Map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0)
+
+[node name="MAP01" parent="Map" instance=ExtResource("20_dcgoc")]
+
+[node name="MAP01_W" parent="Map/MAP01/RootNode/MAP01" index="0"]
+script = ExtResource("18_5pftr")
+dir = Vector3(0.001, 0.001, 0)
+
+[node name="MAP01_B" parent="Map/MAP01/RootNode/MAP01" index="1"]
+script = ExtResource("18_5pftr")
+dir = Vector3(0, 0.01, 0)
+
+[node name="MAP01_BC" parent="Map/MAP01/RootNode/MAP01/MAP01_B" index="0"]
+mesh = null
+
+[node name="Player" parent="." node_paths=PackedStringArray("root", "msg_restart", "msg_win") instance=ExtResource("6_dr1gv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 7.94188, -25)
+root = NodePath("../Sounds")
+msg_restart = NodePath("../HUD/Restart")
+msg_win = NodePath("../HUD/Win")
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_givbw")
+volume_db = -12.0
+autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2of3n")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Restart" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.5
+offset_top = -35.0
+offset_right = 199.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press R to restart"
+label_settings = SubResource("LabelSettings_rvnek")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.5
+offset_top = -70.0
+offset_right = 199.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quit? (Y/N)"
+label_settings = SubResource("LabelSettings_rvnek")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Win" type="TextureRect" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_vvmtu")
+
+[editable path="Dynamic/Car/DeathZone"]
+[editable path="Dynamic/Car2/DeathZone"]
+[editable path="Dynamic/Car3/DeathZone"]
+[editable path="Dynamic/Car4/DeathZone"]
+[editable path="Dynamic/Car5/DeathZone"]
+[editable path="Dynamic/Car6/DeathZone"]
+[editable path="Dynamic3/Spin/Trigger/DeathZone"]
+[editable path="Dynamic3/Spin/Trigger/DeathZone2"]
+[editable path="Dynamic3/Spin/Trigger2/DeathZone3"]
+[editable path="Dynamic3/Spin/Trigger2/DeathZone4"]
+[editable path="Dynamic3/Spin/Trigger3/DeathZone3"]
+[editable path="Dynamic3/Spin/Trigger3/DeathZone4"]
+[editable path="Dynamic3/Spin/Trigger4/DeathZone3"]
+[editable path="Dynamic3/Spin/Trigger4/DeathZone4"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger/DeathZone"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger/DeathZone2"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger2/DeathZone3"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger2/DeathZone4"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger3/DeathZone3"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger3/DeathZone4"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger4/DeathZone3"]
+[editable path="Dynamic3/SpinAxis/Spin2/Trigger4/DeathZone4"]
+[editable path="Dynamic6/Spin/Trigger/DeathZone"]
+[editable path="Dynamic6/Spin/Trigger/DeathZone2"]
+[editable path="Dynamic6/Spin/Trigger2/DeathZone3"]
+[editable path="Dynamic6/Spin/Trigger2/DeathZone4"]
+[editable path="Dynamic6/Spin/Trigger3/DeathZone3"]
+[editable path="Dynamic6/Spin/Trigger3/DeathZone4"]
+[editable path="Dynamic6/Spin/Trigger4/DeathZone3"]
+[editable path="Dynamic6/Spin/Trigger4/DeathZone4"]
+[editable path="Dynamic6/Spin2/Trigger/DeathZone"]
+[editable path="Dynamic6/Spin2/Trigger/DeathZone2"]
+[editable path="Dynamic6/Spin2/Trigger2/DeathZone3"]
+[editable path="Dynamic6/Spin2/Trigger2/DeathZone4"]
+[editable path="Dynamic6/Spin2/Trigger3/DeathZone3"]
+[editable path="Dynamic6/Spin2/Trigger3/DeathZone4"]
+[editable path="Dynamic6/Spin2/Trigger4/DeathZone3"]
+[editable path="Dynamic6/Spin2/Trigger4/DeathZone4"]
+[editable path="Dynamic6/Spin3/Trigger/DeathZone"]
+[editable path="Dynamic6/Spin3/Trigger/DeathZone2"]
+[editable path="Dynamic6/Spin3/Trigger2/DeathZone3"]
+[editable path="Dynamic6/Spin3/Trigger2/DeathZone4"]
+[editable path="Dynamic6/Spin3/Trigger3/DeathZone3"]
+[editable path="Dynamic6/Spin3/Trigger3/DeathZone4"]
+[editable path="Dynamic6/Spin3/Trigger4/DeathZone3"]
+[editable path="Dynamic6/Spin3/Trigger4/DeathZone4"]
+[editable path="Effects/DeathZone"]
+[editable path="Effects/DeathZone2"]
+[editable path="Effects/DeathZone3"]
+[editable path="Effects/DeathZone4"]
+[editable path="Effects/DeathZone5"]
+[editable path="Effects/DeathZone6"]
+[editable path="Map/MAP01"]

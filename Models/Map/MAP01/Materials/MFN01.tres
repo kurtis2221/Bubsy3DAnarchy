@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bdnu82nkslwqm"]
+
+[ext_resource type="Texture2D" uid="uid://6kdulkxs4x4w" path="res://Models/Map/MAP01/Textures/MFN01.png" id="1_qtr1q"]
+
+[resource]
+resource_name = "MFN01"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.627451, 0.627451, 0.627451, 1)
+albedo_texture = ExtResource("1_qtr1q")
+texture_filter = 0

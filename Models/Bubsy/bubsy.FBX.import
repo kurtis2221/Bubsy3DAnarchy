@@ -1,0 +1,83 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://b62utya2425gn"
+path="res://.godot/imported/bubsy.FBX-ea3fc39d63fb7f5112e74d5d38e4e45a.scn"
+
+[deps]
+
+source_file="res://Models/Bubsy/bubsy.FBX"
+dest_files=["res://.godot/imported/bubsy.FBX-ea3fc39d63fb7f5112e74d5d38e4e45a.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=11.5
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"animations": {
+"Take 001": {
+"slice_1/end_frame": 4,
+"slice_1/loop_mode": 1,
+"slice_1/name": "Idle",
+"slice_1/save_to_file/enabled": null,
+"slice_1/save_to_file/keep_custom_tracks": null,
+"slice_1/save_to_file/path": null,
+"slice_1/start_frame": null,
+"slice_2/end_frame": 15,
+"slice_2/loop_mode": 2,
+"slice_2/name": "Walk",
+"slice_2/save_to_file/enabled": null,
+"slice_2/save_to_file/keep_custom_tracks": null,
+"slice_2/save_to_file/path": null,
+"slice_2/start_frame": 5,
+"slice_3/end_frame": 21,
+"slice_3/loop_mode": 2,
+"slice_3/name": "Run",
+"slice_3/save_to_file/enabled": null,
+"slice_3/save_to_file/keep_custom_tracks": null,
+"slice_3/save_to_file/path": null,
+"slice_3/start_frame": 16,
+"slice_4/end_frame": 32,
+"slice_4/loop_mode": 2,
+"slice_4/name": "Jump",
+"slice_4/save_to_file/enabled": null,
+"slice_4/save_to_file/keep_custom_tracks": null,
+"slice_4/save_to_file/path": null,
+"slice_4/start_frame": 22,
+"slice_5/end_frame": 43,
+"slice_5/loop_mode": null,
+"slice_5/name": "Death",
+"slice_5/save_to_file/enabled": null,
+"slice_5/save_to_file/keep_custom_tracks": null,
+"slice_5/save_to_file/path": null,
+"slice_5/start_frame": 33,
+"slices/amount": 5
+}
+},
+"materials": {
+"material0": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/Bubsy/Materials/bubsy.tres"
+},
+"material1": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/Bubsy/Materials/bubsy_col.tres"
+}
+}
+}
+gltf/embedded_image_handling=1

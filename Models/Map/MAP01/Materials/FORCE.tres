@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://skw6hdypuvcv"]
+
+[ext_resource type="Texture2D" uid="uid://b2icevbvosvgr" path="res://Models/Map/MAP01/Textures/FORCE.png" id="1_at84i"]
+
+[resource]
+resource_name = "FORCE"
+blend_mode = 1
+shading_mode = 0
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.25098, 0, 0, 1)
+albedo_texture = ExtResource("1_at84i")

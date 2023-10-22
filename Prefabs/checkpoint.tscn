@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://df3w70wisfg3"]
+
+[ext_resource type="Script" path="res://Scripts/CheckpointArea.cs" id="1_5qd0n"]
+[ext_resource type="Material" uid="uid://cssqffwfy1hqo" path="res://Textures/Materials/cp3.tres" id="2_hx0hc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_btqhw"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lqgp4"]
+points = PackedVector3Array(-1, -1.5, -1, -1, -1.5, 1, -1, 1.5, -1, 1, -1.5, -1, 1, -1.5, 1, -1, 1.5, 1, 1, 1.5, -1, 1, 1.5, 1)
+
+[node name="Checkpoint" type="Area3D"]
+script = ExtResource("1_5qd0n")
+savepos = true
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_hx0hc")
+mesh = SubResource("BoxMesh_btqhw")
+
+[node name="Col" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_lqgp4")

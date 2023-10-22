@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d01tpj6jyj21d"
+path="res://.godot/imported/spin.obj-8a8dbfeb2a83749bbc280fad964876bb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/spin.obj-8a8dbfeb2a83749bbc280fad964876bb.mesh"]
+
+source_file="res://Models/Normal/spin.obj"
+dest_files=["res://.godot/imported/spin.obj-8a8dbfeb2a83749bbc280fad964876bb.mesh", "res://.godot/imported/spin.obj-8a8dbfeb2a83749bbc280fad964876bb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(0.5, 0.5, 0.5)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
