@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://vx2r3wwulpuc"]
+
+[ext_resource type="ArrayMesh" uid="uid://bck08yjtxvadc" path="res://Models/Normal/tree.obj" id="1_f6cme"]
+[ext_resource type="Material" uid="uid://dociji1fux748" path="res://Models/Normal/Materials/tree.tres" id="1_rp04r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2bpfj"]
+size = Vector3(1, 8, 1)
+
+[node name="Tree" type="StaticBody3D"]
+
+[node name="Col" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+shape = SubResource("BoxShape3D_2bpfj")
+
+[node name="Tree" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_rp04r")
+mesh = ExtResource("1_f6cme")

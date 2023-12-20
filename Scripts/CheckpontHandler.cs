@@ -9,6 +9,8 @@ public partial class CheckpontHandler : Node3D
     static List<Node3D> checkpoints;
     static int curr_idx;
 
+    public static Vector3 curr_cp_pos;
+
     public override void _Ready()
     {
         inst = this;
@@ -18,6 +20,7 @@ public partial class CheckpontHandler : Node3D
         {
             checkpoints.Add((Node3D)n);
         }
+        curr_cp_pos = checkpoints[curr_idx].GlobalPosition;
     }
 
     public void LoadNext()
@@ -28,6 +31,7 @@ public partial class CheckpontHandler : Node3D
         {
             tmp.PlaySound(PlayerControl.PlayerSndType.Check);
             Node3D next = checkpoints[curr_idx];
+            curr_cp_pos = checkpoints[curr_idx].GlobalPosition;
             next.ProcessMode = ProcessModeEnum.Inherit;
             next.Visible = true;
         }

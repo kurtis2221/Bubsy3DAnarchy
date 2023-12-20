@@ -1,20 +1,27 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1fn7txwjhyor"]
+[gd_scene load_steps=16 format=3 uid="uid://c1fn7txwjhyor"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerControl.cs" id="1_yn1dr"]
 [ext_resource type="AudioStream" uid="uid://ceglelvbo7fl6" path="res://Sounds/jump.wav" id="2_m176a"]
-[ext_resource type="PackedScene" uid="uid://b62utya2425gn" path="res://Models/Bubsy/bubsy.FBX" id="2_nw3nk"]
 [ext_resource type="Script" path="res://Scripts/CameraControl.cs" id="3_62swt"]
 [ext_resource type="AudioStream" uid="uid://ba0hbjbhxv4vo" path="res://Sounds/land.wav" id="3_co1xx"]
 [ext_resource type="AudioStream" uid="uid://b0dlgsfamusww" path="res://Sounds/death.wav" id="4_l7gcy"]
 [ext_resource type="AudioStream" uid="uid://dn7wgqjh57m62" path="res://Sounds/block.wav" id="5_r3iek"]
 [ext_resource type="AudioStream" uid="uid://c2srdqxaryvnf" path="res://Sounds/armor.wav" id="6_cfvw2"]
 [ext_resource type="AudioStream" uid="uid://hwn8cm1jwy57" path="res://Sounds/alarm.wav" id="7_qpo76"]
+[ext_resource type="PackedScene" uid="uid://b62utya2425gn" path="res://Models/Bubsy/bubsy.FBX" id="8_1ya3y"]
+[ext_resource type="ArrayMesh" uid="uid://bio3wet5fhct2" path="res://Models/Normal/arrow.obj" id="10_c72vf"]
+[ext_resource type="Script" path="res://Scripts/Arrow.cs" id="10_lfhe4"]
+[ext_resource type="Material" uid="uid://b47d325fin0gw" path="res://Models/Normal/Materials/arrow.tres" id="10_o4pxk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nrtxb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pvsr0"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("plat_scan", "char_tr", "char_obj", "cam_y")]
+[sub_resource type="Environment" id="Environment_w6gxj"]
+ambient_light_source = 2
+ambient_light_color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("plat_scan", "char_tr", "char_obj", "cam_y", "arrow_gui")]
 floor_block_on_wall = false
 floor_snap_length = 0.2
 platform_on_leave = 2
@@ -25,6 +32,7 @@ char_tr = NodePath("CharDummy")
 char_obj = NodePath("CharDummy/Bubsy/bubsy")
 cam_y = NodePath("CamY")
 sounds = Array[AudioStream]([ExtResource("2_m176a"), ExtResource("3_co1xx"), ExtResource("4_l7gcy"), ExtResource("5_r3iek"), ExtResource("6_cfvw2"), ExtResource("7_qpo76")])
+arrow_gui = NodePath("CanvasLayer/SubViewportContainer")
 
 [node name="CharDummy" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -32,7 +40,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="Bubsy" type="Node3D" parent="CharDummy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 
-[node name="bubsy" parent="CharDummy/Bubsy" instance=ExtResource("2_nw3nk")]
+[node name="bubsy" parent="CharDummy/Bubsy" instance=ExtResource("8_1ya3y")]
 
 [node name="Col" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_nrtxb")
@@ -46,9 +54,49 @@ player = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="CamY/CamX"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 3.19998)
+cull_mask = 1048573
 
 [node name="AudioListener3D" type="AudioListener3D" parent="CamY/CamX/Camera3D"]
+
+[node name="ArrowCamRemote" type="RemoteTransform3D" parent="CamY"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+remote_path = NodePath("../../CanvasLayer/SubViewportContainer/SubViewport/ArrowCam")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_pvsr0")
+
+[node name="ArrowRemote" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../CanvasLayer/SubViewportContainer/SubViewport/ArrowDummy")
+update_rotation = false
+update_scale = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+visible = false
+offset_left = -32.0
+offset_top = -96.0
+offset_right = 224.0
+offset_bottom = 160.0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 0
+
+[node name="ArrowCam" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+cull_mask = 2
+environment = SubResource("Environment_w6gxj")
+
+[node name="ArrowDummy" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+script = ExtResource("10_lfhe4")
+
+[node name="Arrow" type="MeshInstance3D" parent="CanvasLayer/SubViewportContainer/SubViewport/ArrowDummy"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+layers = 2
+material_override = ExtResource("10_o4pxk")
+mesh = ExtResource("10_c72vf")
+skeleton = NodePath("../../../../..")

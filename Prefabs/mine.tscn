@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://dllh6bhfjg5rm"]
+
+[ext_resource type="Material" uid="uid://cenbuw7u2t7th" path="res://Models/Normal/Materials/mine.tres" id="1_6dppn"]
+[ext_resource type="Script" path="res://Scripts/MineZone.cs" id="1_c333j"]
+[ext_resource type="ArrayMesh" uid="uid://ciodktq583od7" path="res://Models/Normal/mine.obj" id="2_a7rmy"]
+[ext_resource type="Material" uid="uid://cwb4hywk1y3g" path="res://Models/Normal/Materials/fire.tres" id="4_jqfax"]
+[ext_resource type="AudioStream" uid="uid://dalphkjf882n1" path="res://Sounds/expl.wav" id="5_fq74c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x3m7w"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0unsq"]
+
+[sub_resource type="Gradient" id="Gradient_rhqos"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="Mine" type="Area3D" node_paths=PackedStringArray("emitter", "snd")]
+script = ExtResource("1_c333j")
+emitter = NodePath("Emitter")
+snd = NodePath("Snd")
+
+[node name="Col" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_x3m7w")
+
+[node name="Mine" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_6dppn")
+mesh = ExtResource("2_a7rmy")
+skeleton = NodePath("")
+
+[node name="Emitter" type="CPUParticles3D" parent="."]
+material_override = ExtResource("4_jqfax")
+emitting = false
+amount = 16
+explosiveness = 1.0
+mesh = SubResource("QuadMesh_0unsq")
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_max = 180.0
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_rhqos")
+
+[node name="Snd" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_fq74c")

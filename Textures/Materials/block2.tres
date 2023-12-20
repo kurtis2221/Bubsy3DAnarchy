@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bgms8dqtey8fb"]
+
+[ext_resource type="Texture2D" uid="uid://pfo6vnhwwn5m" path="res://Textures/fmt05.png" id="1_34rhg"]
+
+[resource]
+transparency = 1
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(1, 0, 0, 0.12549)
+albedo_texture = ExtResource("1_34rhg")
+metallic_specular = 0.0
+texture_filter = 0

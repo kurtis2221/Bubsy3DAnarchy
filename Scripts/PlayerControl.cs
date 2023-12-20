@@ -43,10 +43,16 @@ public partial class PlayerControl : CharacterBody3D
     public Node3D root;
 
     [Export]
-    public Control msg_restart;
+    public Label msg_restart;
 
     [Export]
     public Control msg_win;
+
+    [Export]
+    public Control arrow_gui;
+
+    [Export]
+    public AudioStreamPlayer music;
 
     AudioStreamPlayer[] snd_players;
 
@@ -62,7 +68,8 @@ public partial class PlayerControl : CharacterBody3D
     float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
     bool old_on_floor;
-    bool block;
+    public bool block;
+    bool block_keys;
 
     public override void _Ready()
     {
@@ -88,6 +95,8 @@ public partial class PlayerControl : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (MenuControl.pause) return;
+
         Vector3 velocity = Velocity;
         bool is_running = Input.IsActionPressed("Run");
         bool on_floor = IsOnFloor();
@@ -140,6 +149,16 @@ public partial class PlayerControl : CharacterBody3D
             velocity.Y = jump_speed;
         }
 
+        if (Input.IsKeyPressed(Key.Backspace) && Input.IsKeyPressed(Key.C))
+        {
+            if (!block_keys)
+            {
+                GlobalPosition = CheckpontHandler.curr_cp_pos;
+                block_keys = true;
+            }
+        }
+        else block_keys = false;
+
         Vector2 inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
         Vector3 direction = (cam_y.GlobalTransform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 
@@ -187,6 +206,15 @@ public partial class PlayerControl : CharacterBody3D
         snd_players[(int)input].Play();
     }
 
+    public void ChangeSounds(float pitch)
+    {
+        music.PitchScale = pitch;
+        foreach (AudioStreamPlayer snd in snd_players)
+        {
+            snd.PitchScale = pitch;
+        }
+    }
+
     void PlayAnimation(PlayerAnimType input)
     {
         if (input == curr_anim) return;
@@ -211,10 +239,11 @@ public partial class PlayerControl : CharacterBody3D
         PlayAnimation(PlayerAnimType.Death);
     }
 
-    void Respawn()
+    private async void Respawn()
     {
         GlobalPosition = last_cp;
-        block = false;
         msg_restart.Visible = false;
+        await ToSignal(GetTree().CreateTimer(0.05), "timeout");
+        block = false;
     }
 }

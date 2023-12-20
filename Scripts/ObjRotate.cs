@@ -20,6 +20,7 @@ public partial class ObjRotate : Node3D, IntObj
     public override void _PhysicsProcess(double delta)
     {
         Rotate(axis, speed);
+        Transform = Transform.Orthonormalized();
     }
 
     public void Activate()

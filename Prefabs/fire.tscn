@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://djdceu0uqj8m2"]
+[gd_scene load_steps=5 format=3 uid="uid://djdceu0uqj8m2"]
 
 [ext_resource type="Material" uid="uid://cwb4hywk1y3g" path="res://Models/Normal/Materials/fire.tres" id="1_1klbi"]
+[ext_resource type="Script" path="res://Scripts/FireLight.cs" id="2_q6bpq"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_pu56b"]
 
@@ -24,3 +25,13 @@ angular_velocity_max = 180.0
 scale_amount_min = 1.5
 scale_amount_max = 1.5
 color_ramp = SubResource("Gradient_y4r3w")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(1, 0.501961, 0, 1)
+light_energy = 4.0
+distance_fade_enabled = true
+distance_fade_begin = 15.0
+distance_fade_length = 5.0
+omni_range = 10.0
+script = ExtResource("2_q6bpq")

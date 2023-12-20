@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl3hdtqb5i7e4"]
+
+[ext_resource type="Material" uid="uid://bgms8dqtey8fb" path="res://Textures/Materials/block2.tres" id="1_0ovwt"]
+[ext_resource type="Material" uid="uid://dxsp0g68oxtmq" path="res://Textures/Materials/block.tres" id="1_b6ypt"]
+[ext_resource type="Script" path="res://Scripts/KaizoBlock2.cs" id="2_1vclj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gfwgv"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iuxfq"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sthdv"]
+size = Vector3(2, 0.05, 2)
+
+[node name="KaizoBlock" type="Node3D"]
+
+[node name="Block" type="StaticBody3D" parent="."]
+
+[node name="Box" type="MeshInstance3D" parent="Block"]
+material_override = ExtResource("1_0ovwt")
+mesh = SubResource("BoxMesh_gfwgv")
+skeleton = NodePath("../../Area")
+
+[node name="Col" type="CollisionShape3D" parent="Block"]
+shape = SubResource("ConvexPolygonShape3D_iuxfq")
+
+[node name="Area" type="Area3D" parent="." node_paths=PackedStringArray("target", "mesh")]
+script = ExtResource("2_1vclj")
+target = NodePath("../Block")
+mesh = NodePath("../Block/Box")
+mat = ExtResource("1_b6ypt")
+
+[node name="Col" type="CollisionShape3D" parent="Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
+shape = SubResource("BoxShape3D_sthdv")

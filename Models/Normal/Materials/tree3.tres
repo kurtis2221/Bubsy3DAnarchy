@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://becdifcyb6j5v"]
+
+[ext_resource type="Texture2D" uid="uid://clldxwhiyctfu" path="res://Models/Normal/Textures/tree3.tga" id="1_y3jie"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+diffuse_mode = 1
+specular_mode = 2
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+albedo_texture = ExtResource("1_y3jie")
+metallic_specular = 0.0
+texture_filter = 0

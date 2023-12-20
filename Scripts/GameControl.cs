@@ -4,12 +4,13 @@ using System;
 public partial class GameControl : Node3D
 {
     [Export]
-    public Control msg_quit;
+    public Control menu;
 
     bool is_quit;
 
     public override void _Ready()
     {
+        Input.MouseMode = Input.MouseModeEnum.Captured;
         Window win = GetWindow();
         win.GrabFocus();
 #if DEBUG
@@ -20,21 +21,11 @@ public partial class GameControl : Node3D
 
     public override void _Input(InputEvent @event)
     {
-        if (Input.IsKeyPressed(Key.Escape))
+        if (Input.IsActionJustPressed("ui_cancel") && BindButton.assign == null)
         {
-            is_quit = true;
-            msg_quit.Visible = true;
-        }
-        if (is_quit)
-        {
-            if (Input.IsKeyPressed(Key.Y))
-            {
-                GetTree().Quit();
-            }
-            else if (Input.IsKeyPressed(Key.N))
-            {
-                msg_quit.Visible = false;
-            }
+            menu.Visible = !menu.Visible;
+            MenuControl.pause = menu.Visible;
+            Input.MouseMode = menu.Visible ? Input.MouseModeEnum.Visible : Input.MouseModeEnum.Captured;
         }
     }
 }

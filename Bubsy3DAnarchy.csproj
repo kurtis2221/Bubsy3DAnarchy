@@ -1,6 +1,15 @@
-<Project Sdk="Godot.NET.Sdk/4.1.2">
+<Project Sdk="Godot.NET.Sdk/4.2.1">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Scenes\**" />
+    <EmbeddedResource Remove="Scenes\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ini_hndl">
+      <HintPath>Libs\ini_hndl.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>
